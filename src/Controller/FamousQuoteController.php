@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Author;
-use App\Entity\FamousQoute;
+use App\Entity\FamousQuote;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -12,28 +12,28 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * Famous Qoute controller.
+ * Famous Quote controller.
  * @Route("/api", name="api_")
  */
-class FamousQouteController extends FOSRestController
+class FamousQuoteController extends FOSRestController
 {
 
     /**
-     * Get Random Qoutes
-     * @Rest\Get("/qoute")
+     * Get Random Quotes
+     * @Rest\Get("/quote")
      * 
      * @return Response
      */
-    public function getQoute()
+    public function getQuote()
     {
-        $repository = $this->getDoctrine()->getRepository(FamousQoute::class);
-        $famous_qoute = $repository->findall();
-        return $this->handleView($this->view($famous_qoute));
+        $repository = $this->getDoctrine()->getRepository(FamousQuote::class);
+        $famous_quote = $repository->findall();
+        return $this->handleView($this->view($famous_quote));
     }
 
     /**
-     * Add Qoutations
-     * @Rest\Post("/qoute")
+     * Add Quotations
+     * @Rest\Post("/quote")
      * 
      * @return Response
      */
@@ -42,13 +42,13 @@ class FamousQouteController extends FOSRestController
         $author = new Author;
         $author->setName($request->query->get('name'));
 
-        $famous_qoute = new FamousQoute;
-        $famous_qoute->setQuote($request->query->get('qoute'));
-        $famous_qoute->setAuthor($author);
+        $famous_quote = new FamousQuote;
+        $famous_quote->setQuote($request->query->get('quote'));
+        $famous_quote->setAuthor($author);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($author);
-        $entityManager->persist($famous_qoute);
+        $entityManager->persist($famous_quote);
         $entityManager->flush();
         return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
         

@@ -39,8 +39,12 @@ class FamousQuoteController extends FOSRestController
      */
     public function store(Request $request)
     {
-        $author = new Author;
-        $author->setName($request->request->get('name'));
+        $repository = $this->getDoctrine()->getRepository(Author::class);
+        $author = $repository->findOneBy(['name' => $request->request->get('name')]);
+        if(empty($author)){
+            $author = new Author;
+            $author->setName($request->request->get('name'));
+        }
 
         $famous_quote = new FamousQuote;
         $famous_quote->setQuote($request->request->get('quote'));
@@ -49,6 +53,28 @@ class FamousQuoteController extends FOSRestController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($author);
         $entityManager->persist($famous_quote);
+        $entityManager->flush();
+        return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
+    }
+
+    /**
+     * Update Quotations
+     * @Rest\Put("/quote")
+     * 
+     * @return Response
+     */
+    public function update(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $famous_quote = $entityManager->getRepository(FamousQuote::class)->find($request->request->get('id'));
+
+        if (!$famous_quote) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+    
+        $famous_quote->setName($request->request->get('id'));
         $entityManager->flush();
         return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
     }

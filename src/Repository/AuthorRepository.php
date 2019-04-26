@@ -20,6 +20,18 @@ class AuthorRepository extends ServiceEntityRepository
     }
 
     // /**
+    //  * Get author by name
+    //  * @return Author
+    //  */
+    // public function findAuthor($value)
+    // {
+    //     return $this->createQueryBuilder('author')
+    //     ->andWhere('author.name = :val')
+    //     ->setParameter('val', $value)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
+    // /**
     //  * @return Author[] Returns an array of Author objects
     //  */
     /*

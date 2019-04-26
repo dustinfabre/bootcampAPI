@@ -40,10 +40,10 @@ class FamousQuoteController extends FOSRestController
     public function store(Request $request)
     {
         $author = new Author;
-        $author->setName($request->query->get('name'));
+        $author->setName($request->request->get('name'));
 
         $famous_quote = new FamousQuote;
-        $famous_quote->setQuote($request->query->get('quote'));
+        $famous_quote->setQuote($request->request->get('quote'));
         $famous_quote->setAuthor($author);
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -53,4 +53,5 @@ class FamousQuoteController extends FOSRestController
         return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
         
     }
+    
 }

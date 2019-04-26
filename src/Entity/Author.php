@@ -24,13 +24,13 @@ class Author
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FamousQoute", mappedBy="author", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FamousQuote", mappedBy="author", orphanRemoval=true)
      */
-    private $famousQoutes;
+    private $famousQuotes;
 
     public function __construct()
     {
-        $this->famousQoutes = new ArrayCollection();
+        $this->famousQuotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,30 +51,30 @@ class Author
     }
 
     /**
-     * @return Collection|FamousQoute[]
+     * @return Collection|FamousQuote[]
      */
-    public function getFamousQoutes(): Collection
+    public function getFamousQuotes(): Collection
     {
-        return $this->famousQoutes;
+        return $this->famousQuotes;
     }
 
-    public function addFamousQoute(FamousQoute $famousQoute): self
+    public function addFamousQuote(FamousQuote $famousQuote): self
     {
-        if (!$this->famousQoutes->contains($famousQoute)) {
-            $this->famousQoutes[] = $famousQoute;
-            $famousQoute->setAuthor($this);
+        if (!$this->famousQuotes->contains($famousQuote)) {
+            $this->famousQuotes[] = $famousQuote;
+            $famousQuote->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeFamousQoute(FamousQoute $famousQoute): self
+    public function removeFamousQuote(FamousQuote $famousQuote): self
     {
-        if ($this->famousQoutes->contains($famousQoute)) {
-            $this->famousQoutes->removeElement($famousQoute);
+        if ($this->famousQuotes->contains($famousQuote)) {
+            $this->famousQuotes->removeElement($famousQuote);
             // set the owning side to null (unless already changed)
-            if ($famousQoute->getAuthor() === $this) {
-                $famousQoute->setAuthor(null);
+            if ($famousQuote->getAuthor() === $this) {
+                $famousQuote->setAuthor(null);
             }
         }
 

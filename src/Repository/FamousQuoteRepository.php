@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\FamousQoute;
+use App\Entity\FamousQuote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method FamousQoute|null find($id, $lockMode = null, $lockVersion = null)
- * @method FamousQoute|null findOneBy(array $criteria, array $orderBy = null)
- * @method FamousQoute[]    findAll()
- * @method FamousQoute[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method FamousQuote|null find($id, $lockMode = null, $lockVersion = null)
+ * @method FamousQuote|null findOneBy(array $criteria, array $orderBy = null)
+ * @method FamousQuote[]    findAll()
+ * @method FamousQuote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FamousQouteRepository extends ServiceEntityRepository
+class FamousQuoteRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, FamousQoute::class);
+        parent::__construct($registry, FamousQuote::class);
     }
 
     // /**
-    //  * @return FamousQoute[] Returns an array of FamousQoute objects
+    //  * @return FamousQuote[] Returns an array of FamousQuote objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FamousQouteRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?FamousQoute
+    public function findOneBySomeField($value): ?FamousQuote
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

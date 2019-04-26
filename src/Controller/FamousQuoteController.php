@@ -24,7 +24,7 @@ class FamousQuoteController extends FOSRestController
      * 
      * @return Response
      */
-    public function getQuote()
+    public function getQuotes()
     {
         $repository = $this->getDoctrine()->getRepository(FamousQuote::class);
         $famous_quote = $repository->findall();
@@ -51,7 +51,6 @@ class FamousQuoteController extends FOSRestController
         $entityManager->persist($famous_quote);
         $entityManager->flush();
         return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
-        
     }
-    
+
 }

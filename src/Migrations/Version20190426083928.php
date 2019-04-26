@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190426051201 extends AbstractMigration
+final class Version20190426083928 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,9 @@ final class Version20190426051201 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE famous_qoute ADD author_id_id INT NOT NULL, DROP name');
-        $this->addSql('ALTER TABLE famous_qoute ADD CONSTRAINT FK_CD8DC51E69CCBE9A FOREIGN KEY (author_id_id) REFERENCES author (id)');
-        $this->addSql('CREATE INDEX IDX_CD8DC51E69CCBE9A ON famous_qoute (author_id_id)');
+        $this->addSql('CREATE TABLE author (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE famous_quote (id INT AUTO_INCREMENT NOT NULL, author_id INT NOT NULL, quote VARCHAR(255) NOT NULL, INDEX IDX_E3985443F675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE famous_quote ADD CONSTRAINT FK_E3985443F675F31B FOREIGN KEY (author_id) REFERENCES author (id)');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +32,8 @@ final class Version20190426051201 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE famous_qoute DROP FOREIGN KEY FK_CD8DC51E69CCBE9A');
-        $this->addSql('DROP INDEX IDX_CD8DC51E69CCBE9A ON famous_qoute');
-        $this->addSql('ALTER TABLE famous_qoute ADD name VARCHAR(255) NOT NULL COLLATE utf8mb4_unicode_ci, DROP author_id_id');
+        $this->addSql('ALTER TABLE famous_quote DROP FOREIGN KEY FK_E3985443F675F31B');
+        $this->addSql('DROP TABLE author');
+        $this->addSql('DROP TABLE famous_quote');
     }
 }

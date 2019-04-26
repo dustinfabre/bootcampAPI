@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\FamousQouteRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FamousQuoteRepository")
  */
 class FamousQuote
 {
@@ -22,7 +22,7 @@ class FamousQuote
     private $quote;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="famousQoutes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="famousQuotes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;

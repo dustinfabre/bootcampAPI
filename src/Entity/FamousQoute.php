@@ -25,7 +25,7 @@ class FamousQoute
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="famousQoutes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author_id;
+    private $author;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class FamousQoute
         return $this;
     }
 
-    public function getAuthorId(): ?Author
+    public function getAuthor(): ?Author
     {
-        return $this->author_id;
+        return $this->author;
     }
 
-    public function setAuthorId(?Author $author_id): self
+    public function setAuthor(?Author $author): self
     {
-        $this->author_id = $author_id;
+        $this->author = $author;
 
         return $this;
     }

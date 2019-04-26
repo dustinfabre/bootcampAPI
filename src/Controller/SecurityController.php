@@ -9,7 +9,7 @@ use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 
-class SecurityController extends AbstractController
+class SecurityController extends FOSRestController
 {
     private $client_manager;
 
@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
     {
         $this->client_manager = $client_manager;
     }
-    
+
     /**
      * Create Client.
      * @FOSRest\Post("/createClient")

@@ -26,17 +26,16 @@ class SecurityController extends FOSRestController
      */
     public function AuthenticationAction(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        if (empty($data['redirect-uri']) || empty($data['grant-type'])) {
-        return $this->handleView($this->view($data));
+        if (empty($request->request->get('redirect-uri')) || empty($request->request->get('grant-type'))) {
+            return $this->handleView($this->view($data));
         }
         $clientManager = $this->client_manager;
         $client = $clientManager->createClient();
-        $client->setRedirectUris([$data['redirect-uri']]);
-        $client->setAllowedGrantTypes([$data['grant-type']]);
+        $client->setRedirectUris([$request->request->get('redirect-uri')]);
+        $client->setAllowedGrantTypes([$request->request->get('grant-type')]);
         $clientManager->updateClient($client);
         $rows = [
-        'client_id' => $client->getPublicId(), 'client_secret' => $client->getSecret()
+            'client_id' => $client->getPublicId(), 'client_secret' => $client->getSecret()
         ];
         return $this->handleView($this->view($rows));
     }

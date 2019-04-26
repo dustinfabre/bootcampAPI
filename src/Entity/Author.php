@@ -24,7 +24,7 @@ class Author
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FamousQoute", mappedBy="author_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FamousQoute", mappedBy="author", orphanRemoval=true)
      */
     private $famousQoutes;
 
@@ -62,7 +62,7 @@ class Author
     {
         if (!$this->famousQoutes->contains($famousQoute)) {
             $this->famousQoutes[] = $famousQoute;
-            $famousQoute->setAuthorId($this);
+            $famousQoute->setAuthor($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Author
         if ($this->famousQoutes->contains($famousQoute)) {
             $this->famousQoutes->removeElement($famousQoute);
             // set the owning side to null (unless already changed)
-            if ($famousQoute->getAuthorId() === $this) {
-                $famousQoute->setAuthorId(null);
+            if ($famousQoute->getAuthor() === $this) {
+                $famousQoute->setAuthor(null);
             }
         }
 
